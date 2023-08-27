@@ -18,8 +18,8 @@ pub fn net_present_value(principal: Principal) -> u128 {
 }
 
 /// Check if principal is a deponent
-pub fn is_deponent(deponent_net_present_value: u128) -> bool {
-    if deponent_net_present_value > u64::MAX  as u128 {
+pub fn is_deponent(is_alive: bool, deponent_net_present_value: u128) -> bool {
+    if is_alive && deponent_net_present_value > u64::MAX  as u128  {
         true
     } else {
         false
@@ -55,12 +55,12 @@ mod tests {
     /// Verify a principal as not a deponent
     #[test]
     fn verify_principal_is_not_a_deponent() {
-        assert_eq!(is_deponent(u128::MIN), false); 
+        assert_eq!(is_deponent(true, u128::MIN), false); 
     }
 
     /// Verify principal as a deponent
     #[test]
     fn verify_principal_is_a_deponent() {
-        assert_eq!(is_deponent(u64::MAX as u128), false); 
+        assert_eq!(is_deponent(true, u64::MAX as u128), false); 
     }
 }
