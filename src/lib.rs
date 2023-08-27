@@ -9,7 +9,12 @@ pub struct Principal {
 
 /// Calculate net present value
 pub fn net_present_value(principal: Principal) -> u128 {
-    principal.net_cash_flow_at_time_t / (1 + principal.discount_rate).pow(principal.time_of_cash_flow as u32)
+    if principal.is_alive {
+        principal.net_cash_flow_at_time_t / (1 + principal.discount_rate).pow(principal.time_of_cash_flow as u32)
+    } else {
+        0
+    }
+    
 }
 
 /// Check if principal is a deponent
